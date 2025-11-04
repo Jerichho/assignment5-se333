@@ -20,15 +20,27 @@ jobs:
 
       - name: Install Linter
         ##TODO
+        run: mvn -q clean install -DskipTests
+
 
       - name: Run Checkstyle
         ##TODO
+        run: mvn -q checkstyle:checkstyle
+
 
       - name: Upload Checkstyle Result
         ##TODO
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: checkstyle-result
+          path: target/site/checkstyle.html
 
       - name: Run Maven Test
         ##TODO
+        run: mvn -q test
+
 
       - name: Jacoco Report
         ##TODO
+        run: mvn -q jacoco:report
